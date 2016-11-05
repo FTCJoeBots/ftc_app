@@ -46,8 +46,8 @@ import java.util.Set;
  * This particular OpMode executes a Tank Drive style Teleop for the 2015 JoeBot
  */
 
-@TeleOp(name="EstesE POV Drive", group="Test")
-//@Disabled
+@TeleOp(name="Servo-Test", group="Test")
+
 public class Opmode_ServoTest extends LinearOpMode {
 
     /* Declare OpMode members. */
@@ -76,10 +76,10 @@ public class Opmode_ServoTest extends LinearOpMode {
 
         // Send telemetry message to signify robot waiting;
         telemetry.addData("Say", "Hello Ethan");    //
-        telemetry.update();
+
 
         telemetry.addData("right Servo Position:", robot.srv_right.getPosition());
-
+        telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -103,11 +103,8 @@ public class Opmode_ServoTest extends LinearOpMode {
 
 
                     if (bRSRVout) {
-                        robot.srv_right.setPosition(robot.srv_right.getPosition() + 0.2);
+                        robot.srv_right.setPosition(0.01);
 
-                    } else {
-                        robot.srv_right.setPosition(robot.srv_right.getPosition() - 0.2);
-                    }
 
                     telemetry.addData("right Servo Position:", robot.srv_right.getPosition());
 
@@ -128,3 +125,4 @@ public class Opmode_ServoTest extends LinearOpMode {
         }
 
 
+    }
