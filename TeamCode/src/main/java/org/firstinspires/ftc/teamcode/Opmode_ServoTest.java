@@ -51,15 +51,16 @@ import java.util.Set;
 public class Opmode_ServoTest extends LinearOpMode {
 
     /* Declare OpMode members. */
-    HardwareJoeBot  robot           = new HardwareJoeBot();     // Use a JoeBot's hardware
+    HardwareJoeBot robot = new HardwareJoeBot();     // Use a JoeBot's hardware
 
-    boolean         bCurrStateR;
-    boolean         bPrevStateR;
-    boolean         bCurrStateL;
-    boolean         bPrevStateL;
-    boolean         bLSRVout;
-    boolean         bRSRVout;
-    boolean         brainsteroids;
+    boolean bCurrStateR;
+    boolean bPrevStateR;
+    boolean bCurrStateL;
+    boolean bPrevStateL;
+    boolean bLSRVout;
+    boolean bRSRVout;
+    boolean brainsteroids;
+
     @Override
     public void runOpMode() throws InterruptedException {
         double left;
@@ -77,7 +78,7 @@ public class Opmode_ServoTest extends LinearOpMode {
         telemetry.addData("Say", "Hello Ethan");    //
         telemetry.update();
 
-        telemetry.addData("right Servo Position:",robot.srv_right.getPosition());
+        telemetry.addData("right Servo Position:", robot.srv_right.getPosition());
 
 
         // Wait for the game to start (driver presses PLAY)
@@ -91,39 +92,39 @@ public class Opmode_ServoTest extends LinearOpMode {
             bCurrStateR = gamepad1.b;
 
             // check for button state transitions.
-            if ((bCurrStateR == true) && (bCurrStateR != bPrevStateR))  {
+            if ((bCurrStateR == true) && (bCurrStateR != bPrevStateR)) {
 
                 // button is transitioning to a pressed state. So Toggle LED
-                 bRSRVout = !bRSRVout;
+                bRSRVout = !bRSRVout;
+
+                {
+                    // update previous state variable.
+                    bPrevStateR = bCurrStateR;
 
 
+                    if (bRSRVout) {
+                        robot.srv_right.setPosition(robot.srv_right.getPosition() + 0.2);
+
+                    } else {
+                        robot.srv_right.setPosition(robot.srv_right.getPosition() - 0.2);
+                    }
+
+                    telemetry.addData("right Servo Position:", robot.srv_right.getPosition());
+
+
+                    //-------------------------------------------------------------------------------//
+
+
+
+
+                            // Pause for metronome tick.  40 mS each cycle = update 25 times a second.
+                            robot.waitForTick(40);
+                        }
+                    }
+                }
 
 
             }
-            // update previous state variable.
-            bPrevStateR = bCurrStateR;
-
-
-
-            if (bRSRVout){
-                robot.srv_right.setPosition(robot.srv_right.getPosition()+0.2);
-
-            } else {
-                robot.srv_right.setPosition(robot.srv_right.getPosition()-0.2);
-            }
-
-            telemetry.addData("right Servo Position:",robot.srv_right.getPosition());
-
-
-
-
-            // Pause for metronome tick.  40 mS each cycle = update 25 times a second.
-            robot.waitForTick(40);
         }
-    }
-}
-
-
-
 
 
