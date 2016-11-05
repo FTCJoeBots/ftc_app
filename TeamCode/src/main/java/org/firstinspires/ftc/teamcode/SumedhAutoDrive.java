@@ -65,7 +65,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="Sumedh 6Wheel Test", group="Test")
+@Autonomous(name="the one and only code  ", group="Test")
 //@Disabled
 public class SumedhAutoDrive extends LinearOpMode {
 
@@ -113,11 +113,11 @@ public class SumedhAutoDrive extends LinearOpMode {
 
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED, 141, 141, 6.0);  // S1: Forward 47 Inches with 5 Sec timeout
-        encoderDrive(DRIVE_SPEED, 5, -5, 3.0);  // S1: Forward 47 Inches with 5 Sec timeout
-        encoderDrive(DRIVE_SPEED, 35, 35,4.0);// S1: Forward 47 Inches with 5 Sec timeout
-        encoderDrive(DRIVE_SPEED, 42, 42,4.0);  // S1: Forward 47 Inches with 5 Sec timeout
-
+        encoderDrive(DRIVE_SPEED, 66, 66, 6.0);  // S1: Forward 47 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED, 16, -16 ,5.0);  // S1: Forward 47 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED, 40, 40,4.0);  // S1: Forward 47 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED, 13,-13,2.5);  // S1: Forward 47 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED, 50, 50,6.0);  // S1: Forward 47 Inches with 5 Sec timeout
 
 
         telemetry.addData("Path", "Complete");
