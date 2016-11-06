@@ -43,14 +43,18 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  * This particular OpMode executes a Tank Drive style Teleop for the 2015 JoeBot
  */
 
-@TeleOp(name="EstesE POV Drive", group="Test")
+@TeleOp(name="JEl POV Drive", group="Test")
 //@Disabled
-public class OpmodeTeleopEstesE extends LinearOpMode {
+public class Opmode_JEl extends LinearOpMode {
 
     /* Declare OpMode members. */
     HardwareJoeBot  robot           = new HardwareJoeBot();     // Use a JoeBot's hardware
-
-
+    boolean         intakeEnabledX;
+    boolean         intakeEnabledY;
+    boolean         bCurrStateY;
+    boolean         bPrevStateY;
+    boolean         bCurrStateX;
+    boolean         bPrevStateX;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -69,7 +73,8 @@ public class OpmodeTeleopEstesE extends LinearOpMode {
         telemetry.addData("Say", "Hello Ethan");    //
         telemetry.update();
 
-
+        intakeEnabledY=false;
+        intakeEnabledX=false;
 
 
         // Wait for the game to start (driver presses PLAY)
@@ -80,12 +85,73 @@ public class OpmodeTeleopEstesE extends LinearOpMode {
 
             // Run wheels in Tank mode (note: The joystick goes negative when pushed forwards, so negate it)
             // In this mode the Left stick moves the robot fwd and back, the Right stick turns left and right.
-            left = -gamepad1.left_stick_y;
-            right = -gamepad1.right_stick_y;
+            left = -gamepad1.left_stick_y/2.3;
+            right = -gamepad1.right_stick_y/2.3;
             robot.motor_driveleft.setPower(left);
             robot.motor_driveright.setPower(right);
 
 
+            // check the status of the y button on either gamepad.
+            bCurrStateY = gamepad1.y;
+
+            // check for button state transitions.
+            if ((bCurrStateY == true) && (bCurrStateY != bPrevStateY))  {
+
+                // button is transitioning to a pressed state. So Toggle LED
+                intakeEnabledY = !intakeEnabledY;
+
+            }
+            // update previous state variable.
+            bPrevStateY = bCurrStateY;
+            if (intakeEnabledY == true){
+                robot.motor_arm.setPower(-0.35);
+            }
+            if (intakeEnabledY != true){
+                robot.motor_arm.setPower(0);
+            }
+
+
+
+            // check the status of the x button on either gamepad.
+            bCurrStateX = gamepad1.x;
+
+            // check for button state transitions.
+            if ((bCurrStateX == true) && (bCurrStateX != bPrevStateX))  {
+
+                // button is transitioning to a pressed state. So Toggle LED
+                intakeEnabledX = !intakeEnabledX;
+
+            }
+            // update previous state variable.
+            bPrevStateX = bCurrStateX;
+            if (intakeEnabledX == true){
+                robot.motor_arm.setPower(0.35);
+            }
+            if (intakeEnabledX != true){
+                robot.motor_arm.setPower(0);
+            }
+
+
+
+
+
+
+
+
+            //Look For y button Press
+
+
+           /* if (gamepad1.y){
+                  if (intakeEnabled == true){
+                    intakeEnabled=false;
+                    telemetry.addLine("Disabled Intake");
+                } else {
+                    intakeEnabled = true;
+                    telemetry.addLine("Enabled Intake");
+                    telemetry.update();
+                }
+            }
+           */
 
 
 
