@@ -103,7 +103,7 @@ public class Opmode_ServoTest extends LinearOpMode {
 
 
                     if (bRSRVout) {
-                        robot.srv_right.setPosition(0.01);
+                        robot.srv_left.setPosition(0.01);
 
 
                     telemetry.addData("right Servo Position:", robot.srv_right.getPosition());
