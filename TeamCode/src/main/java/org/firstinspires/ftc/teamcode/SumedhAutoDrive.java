@@ -65,21 +65,21 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name="JES: Auto Drive By Encoder", group="Test")
-@Disabled
+@Autonomous(name="the one and only code  ", group="Test")
+//@Disabled
 public class SumedhAutoDrive extends LinearOpMode {
 
     /* Declare OpMode members. */
-    HardwareJoeBot         robot   = new HardwareJoeBot();   // Use a Pushbot's hardware
-    private ElapsedTime     runtime = new ElapsedTime();
+    HardwareJoeBot robot = new HardwareJoeBot();   // Use a Pushbot's hardware
+    private ElapsedTime runtime = new ElapsedTime();
 
-    static final double     COUNTS_PER_MOTOR_REV    = 1440 ;    // eg: TETRIX Motor Encoder
-    static final double     DRIVE_GEAR_REDUCTION    = 2.0 ;     // This is < 1.0 if geared UP
-    static final double     WHEEL_DIAMETER_INCHES   = 4.0 ;     // For figuring circumference
-    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
-                                                      (WHEEL_DIAMETER_INCHES * 3.1415);
-    static final double     DRIVE_SPEED             = 0.6;
-    static final double     TURN_SPEED              = 0.5;
+    static final double COUNTS_PER_MOTOR_REV = 1120;    // eg: TETRIX Motor Encoder
+    static final double DRIVE_GEAR_REDUCTION = 1.;     // This is < 1.0 if geared UP
+    static final double WHEEL_DIAMETER_INCHES = 4.0;     // For figuring circumference
+    static final double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
+            (WHEEL_DIAMETER_INCHES * 3.1415);
+    static final double DRIVE_SPEED = 0.4;
+    static final double TURN_SPEED = 0.1;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -102,20 +102,22 @@ public class SumedhAutoDrive extends LinearOpMode {
         robot.motor_driveright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Send telemetry message to indicate successful Encoder reset
-        telemetry.addData("Path0",  "Starting at %7d :%7d",
-                          robot.motor_driveleft.getCurrentPosition(),
-                          robot.motor_driveright.getCurrentPosition());
+        telemetry.addData("Path0", "Starting at %7d :%7d",
+                robot.motor_driveleft.getCurrentPosition(),
+                robot.motor_driveright.getCurrentPosition());
         telemetry.update();
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
+
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
-        encoderDrive(DRIVE_SPEED,  48,  48, 5.0);  // S1: Forward 47 Inches with 5 Sec timeout
-        encoderDrive(TURN_SPEED,   12, -12, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
-        encoderDrive(DRIVE_SPEED, -24, -24, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
-
+        encoderDrive(DRIVE_SPEED, 66, 66, 6.0);  // S1: Forward 47 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED, 16, -16 ,5.0);  // S1: Forward 47 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED, 40, 40,4.0);  // S1: Forward 47 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED, 13,-13,2.5);  // S1: Forward 47 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED, 50, 50,6.0);  // S1: Forward 47 Inches with 5 Sec timeout
 
 
         telemetry.addData("Path", "Complete");
@@ -136,7 +138,7 @@ public class SumedhAutoDrive extends LinearOpMode {
         int newLeftTarget;
         int newRightTarget;
 
-        // Ensure that the opmode is still active
+        // Ensure that the opmodeis still active
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
@@ -147,7 +149,7 @@ public class SumedhAutoDrive extends LinearOpMode {
 
             // Turn On RUN_TO_POSITION
             robot.motor_driveleft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            newRightTarget = robot.motor_driveright.
+            robot.motor_driveright.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             // reset the timeout time and start motion.
             runtime.reset();
@@ -156,14 +158,14 @@ public class SumedhAutoDrive extends LinearOpMode {
 
             // keep looping while we are still active, and there is time left, and both motors are running.
             while (opModeIsActive() &&
-                   (runtime.seconds() < timeoutS) &&
-                   (robot.motor_driveleft.isBusy() && robot.motor_driveright.isBusy())) {
+                    (runtime.seconds() < timeoutS) &&
+                    (robot.motor_driveleft.isBusy() && robot.motor_driveright.isBusy())) {
 
                 // Display it for the driver.
                 telemetry.addData("Path1",  "Running to %7d :%7d", newLeftTarget,  newRightTarget);
                 telemetry.addData("Path2",  "Running at %7d :%7d",
-                                            robot.motor_driveleft.getCurrentPosition(),
-                                            robot.motor_driveright.getCurrentPosition());
+                        robot.motor_driveleft.getCurrentPosition(),
+                        robot.motor_driveright.getCurrentPosition());
                 telemetry.update();
 
                 // Allow time for other processes to run.
@@ -175,10 +177,12 @@ public class SumedhAutoDrive extends LinearOpMode {
             robot.motor_driveright.setPower(0);
 
             // Turn off RUN_TO_POSITION
-            robot.motor_driveright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.motor_driveleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.motor_driveright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
             //  sleep(250);   // optional pause after each move
         }
+
+        }
     }
-}
+

@@ -39,6 +39,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 /**
  * This file illustrates the concept of driving a path based on encoder counts.
@@ -115,31 +116,44 @@ public class sumedh_test extends LinearOpMode {
         // Step through each leg of the path,
         // Note: Reverse movement is obtained by setting a negative distance (not speed)
 
-        encoderDrive(DRIVE_SPEED,  140,  121 ,6.0);  // S1: Forward 47 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED,  20,  20 ,3.0);  // S1: Forward 47 Inches with 5 Sec timeout
         telemetry.addData("Status", "turning right ");    //
         telemetry.update();
 
-        encoderDrive(TURN_SPEED,   -17, 18, 5.9);  // S2: Turn Right 12 Inches with 4 Sec timeout
+
+      //      telemetry.addData("raw ultrasonic", robot.rangeSensor.rawUltrasonic());
+//    telemetry.addData("raw optical", robot.rangeSensor.rawOptical());
+//    telemetry.addData("cm optical", "%.2f cm", robot.rangeSensor.cmOptical());
+//    telemetry.addData("cm", "%.2f cm", robot.rangeSensor.getDistance(DistanceUnit.CM));
+
+
+
+
+
+        //encoderDrive(TURN_SPEED,   -17, 18, 5.9);  // S2: Turn Right 12 Inches with 4 Sec timeout
         //encoderDrive(DRIVE_SPEED, , -10, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
         telemetry.addData("Status", "going straight ");    //
         telemetry.update();
         sleep(1000);
-        encoderDrive(DRIVE_SPEED,  100,100,10.1);
+        //encoderDrive(DRIVE_SPEED,  100,100,10.1);
         telemetry.addData("Status", "pausing");    //
         telemetry.update();
         sleep(1000);
-        encoderDrive(DRIVE_SPEED,  0,0,0.5);
+        //encoderDrive(DRIVE_SPEED,  0,0,0.5);
         telemetry.addData("Status", "Reverse ");    //
         telemetry.update();
 sleep(1000);
-        encoderDrive(DRIVE_SPEED,  -150,-150,15.0);
-        encoderDrive(TURN_SPEED,   18, -18, 3.0);  // S2: Turn Right 12 Inches with 4 Sec timeou
-        encoderDrive(DRIVE_SPEED,  40,40,7.0);
+        //encoderDrive(DRIVE_SPEED,  -150,-150,15.0);
+        //encoderDrive(TURN_SPEED,   18, -18, 3.0);  // S2: Turn Right 12 Inches with 4 Sec timeou
+        //encoderDrive(DRIVE_SPEED,  40,40,7.0);
         sleep(1000);     // pause for servos to move
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
     }
+
+
+
 
     /*
      *  Method to perfmorm a relative move, based on encoder counts.
@@ -200,4 +214,6 @@ sleep(1000);
             //  sleep(250);   // optional pause after each move
         }
     }
+
+
 }

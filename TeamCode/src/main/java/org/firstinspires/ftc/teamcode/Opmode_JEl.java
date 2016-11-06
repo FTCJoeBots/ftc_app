@@ -32,12 +32,8 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.util.Range;
-
-import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
 
 /**
  * This OpMode uses the JoeBot hardware class to define the devices on the robot.
@@ -47,24 +43,24 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
  * This particular OpMode executes a Tank Drive style Teleop for the 2015 JoeBot
  */
 
-@TeleOp(name="Tank Drive TeleOp", group="Greg")
+@TeleOp(name="JEl POV Drive", group="Test")
 //@Disabled
-public class OpmodeTeleopBasic extends LinearOpMode {
+public class Opmode_JEl extends LinearOpMode {
 
     /* Declare OpMode members. */
     HardwareJoeBot  robot           = new HardwareJoeBot();     // Use a JoeBot's hardware
-
-    //double          clawOffset      = 0;                       // Servo mid position
-    //final double    CLAW_SPEED      = 0.02 ;                   // sets rate to move servo
+    boolean         intakeEnabledX;
+    boolean         intakeEnabledY;
+    boolean         bCurrStateY;
+    boolean         bPrevStateY;
+    boolean         bCurrStateX;
+    boolean         bPrevStateX;
 
     @Override
     public void runOpMode() throws InterruptedException {
         double left;
         double right;
-        double rightTrigger;
-        double leftTrigger;
-        double rPosition;
-        double lPosition;
+
 
         //double max;
 
@@ -74,13 +70,11 @@ public class OpmodeTeleopBasic extends LinearOpMode {
         robot.init(hardwareMap);
 
         // Send telemetry message to signify robot waiting;
-        telemetry.addData("Say", "Hello Driver");
-        telemetry.addData("Say", "Starting Drive Control Mode");
+        telemetry.addData("Say", "Hello Ethan");    //
         telemetry.update();
 
-        //Set rPosition & lPosition to initial States
-        //lPosition = HardwareJoeBot.LEFT_SERVO_MIN;
-        //rPosition = HardwareJoeBot.RIGHT_SERVO_MIN;
+        intakeEnabledY=false;
+        intakeEnabledX=false;
 
 
         // Wait for the game to start (driver presses PLAY)
@@ -91,47 +85,83 @@ public class OpmodeTeleopBasic extends LinearOpMode {
 
             // Run wheels in Tank mode (note: The joystick goes negative when pushed forwards, so negate it)
             // In this mode the Left stick moves the robot fwd and back, the Right stick turns left and right.
-            left = -gamepad1.left_stick_y;
-            right = -gamepad1.right_stick_y;
+            left = -gamepad1.left_stick_y/2.3;
+            right = -gamepad1.right_stick_y/2.3;
             robot.motor_driveleft.setPower(left);
             robot.motor_driveright.setPower(right);
 
-            // Raise Arm with Triggers
-            leftTrigger = gamepad1.left_trigger;
-            rightTrigger = gamepad1.right_trigger;
-            //If the right trigger is pressed, we're going to ignore left trigger
-            if (rightTrigger>0) {
-                robot.motor_arm.setPower(rightTrigger);
-            } else if (leftTrigger>0) {
-                robot.motor_arm.setPower(-leftTrigger);
-            } else {
+
+            // check the status of the y button on either gamepad.
+            bCurrStateY = gamepad1.y;
+
+            // check for button state transitions.
+            if ((bCurrStateY == true) && (bCurrStateY != bPrevStateY))  {
+
+                // button is transitioning to a pressed state. So Toggle LED
+                intakeEnabledY = !intakeEnabledY;
+
+            }
+            // update previous state variable.
+            bPrevStateY = bCurrStateY;
+            if (intakeEnabledY == true){
+                robot.motor_arm.setPower(-0.35);
+            }
+            if (intakeEnabledY != true){
                 robot.motor_arm.setPower(0);
             }
 
-            // Use Bumpers to extend wings. If the wing is already out, bumper should pull it in.
-           /* if (gamepad1.left_bumper) {
-                // Check to see if wing is extended
-                if (lPosition == HardwareJoeBot.LEFT_SERVO_MAX) {
-                    robot.srv_left.setPosition(HardwareJoeBot.LEFT_SERVO_MIN);
-                    lPosition = HardwareJoeBot.LEFT_SERVO_MIN;
-                } else if (lPosition == HardwareJoeBot.LEFT_SERVO_MIN) {
-                    robot.srv_left.setPosition(HardwareJoeBot.LEFT_SERVO_MAX);
-                    lPosition = HardwareJoeBot.LEFT_SERVO_MAX;
-                }     */
+
+
+            // check the status of the x button on either gamepad.
+            bCurrStateX = gamepad1.x;
+
+            // check for button state transitions.
+            if ((bCurrStateX == true) && (bCurrStateX != bPrevStateX))  {
+
+                // button is transitioning to a pressed state. So Toggle LED
+                intakeEnabledX = !intakeEnabledX;
+
             }
-            /*if (gamepad1.right_bumper) {
-                // Check to see if wing is extended
-                if (rPosition == HardwareJoeBot.RIGHT_SERVO_MAX) {
-                    robot.srv_right.setPosition(HardwareJoeBot.RIGHT_SERVO_MIN);
-                    rPosition = HardwareJoeBot.RIGHT_SERVO_MIN;
-                } else if (rPosition == HardwareJoeBot.RIGHT_SERVO_MIN){
-                    robot.srv_right.setPosition(HardwareJoeBot.RIGHT_SERVO_MAX);
-                  //  rPosition = HardwareJoeBot.RIGHT_SERVO_MAX;
-                }*/
+            // update previous state variable.
+            bPrevStateX = bCurrStateX;
+            if (intakeEnabledX == true){
+                robot.motor_arm.setPower(0.35);
             }
+            if (intakeEnabledX != true){
+                robot.motor_arm.setPower(0);
+            }
+
+
+
+
+
+
+
+
+            //Look For y button Press
+
+
+           /* if (gamepad1.y){
+                  if (intakeEnabled == true){
+                    intakeEnabled=false;
+                    telemetry.addLine("Disabled Intake");
+                } else {
+                    intakeEnabled = true;
+                    telemetry.addLine("Enabled Intake");
+                    telemetry.update();
+                }
+            }
+           */
+
+
+
+
+
+
+
 
             // Pause for metronome tick.  40 mS each cycle = update 25 times a second.
-            //robot.waitForTick(40);
+            robot.waitForTick(40);
         }
-
-
+    }
+}
