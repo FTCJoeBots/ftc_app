@@ -63,7 +63,7 @@ public class HardwareJoeBot
 
         //Define Sensors
         colorSensor = hwMap.colorSensor.get("color-sensor");
-       rangeSensor = hwMap.get(ModernRoboticsI2cRangeSensor.class, "range-sensor");
+        rangeSensor = hwMap.get(ModernRoboticsI2cRangeSensor.class, "range-sensor");
 
         //Enable Color Sensor LED
         colorSensor.enableLed(true);
@@ -82,8 +82,11 @@ public class HardwareJoeBot
         // Define and initialize ALL installed servos.
         srv_left = hwMap.servo.get("srv-left");
         srv_right = hwMap.servo.get("srv-right");
-        srv_left.setPosition(LEFT_SERVO_MIN);
+       /* srv_left.setPosition(LEFT_SERVO_MIN);
         srv_right.setPosition(RIGHT_SERVO_MIN);
+        srv_left.setPosition(LEFT_SERVO_MAX);
+        srv_right.setPosition(RIGHT_SERVO_MAX);
+        */
     }
 
     /***
