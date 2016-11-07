@@ -54,7 +54,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
  */
 
 @TeleOp(name="Pushbot: Teleop POV SumedhA", group="Pushbot")
-
+@Disabled
 public class sumedhA extends LinearOpMode {
 
     /* Declare OpMode members. */

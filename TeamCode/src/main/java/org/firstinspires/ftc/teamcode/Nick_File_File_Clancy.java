@@ -54,6 +54,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
  */
 
 @TeleOp(name="Pushbot: Teleop POV", group="Pushbot")
+@Disabled
 public class Nick_File_File_Clancy extends LinearOpMode {
 
     /* Declare OpMode members. */

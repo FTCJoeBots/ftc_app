@@ -34,6 +34,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+
 
 /**
  * This OpMode uses the JoeBot hardware class to define the devices on the robot.
@@ -44,7 +46,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  */
 
 @TeleOp(name="Greg Tank Drive", group="Test")
-//@Disabled
+@Disabled
 public class OpmodeTeleopGreg extends LinearOpMode {
 
     /* Declare OpMode members. */

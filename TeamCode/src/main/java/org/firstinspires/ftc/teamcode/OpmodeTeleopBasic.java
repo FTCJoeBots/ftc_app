@@ -48,7 +48,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
  */
 
 @TeleOp(name="Tank Drive TeleOp", group="Greg")
-//@Disabled
+@Disabled
 public class OpmodeTeleopBasic extends LinearOpMode {
 
     /* Declare OpMode members. */

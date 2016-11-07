@@ -54,7 +54,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
  */
 
 @TeleOp(name="Pushbot: Jacktest", group="Pushbot")
-
+@Disabled
 public class FrancisTeleopPOV_ extends LinearOpMode {
 
     /* Declare OpMode members. */
