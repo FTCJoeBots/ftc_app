@@ -32,13 +32,10 @@ public class HardwareJoeBot
     public ColorSensor                  colorSensor       = null;
     public ModernRoboticsI2cRangeSensor rangeSensor       = null;
 
-    public static final double RIGHT_SERVO_MAX   =  0.1 ;
-    public static final double RIGHT_SERVO_MIN   =  0.9 ;
-    public static final double LEFT_SERVO_MAX   =  0.9 ;
-    public static final double LEFT_SERVO_MIN   =  0.1 ;
-
-    //public static final double ARM_UP_POWER    =  0.45 ;
-    //public static final double ARM_DOWN_POWER  = -0.45 ;
+    public static final double RIGHT_SERVO_OUT   =  0.25 ;
+    public static final double RIGHT_SERVO_IN   =  0.05 ;
+    public static final double LEFT_SERVO_IN   =  0.75 ;
+    public static final double LEFT_SERVO_OUT   =  0.55 ;
 
     /* local OpMode members. */
     HardwareMap hwMap           =  null;
@@ -82,11 +79,11 @@ public class HardwareJoeBot
         // Define and initialize ALL installed servos.
         srv_left = hwMap.servo.get("srv-left");
         srv_right = hwMap.servo.get("srv-right");
-       /* srv_left.setPosition(LEFT_SERVO_MIN);
-        srv_right.setPosition(RIGHT_SERVO_MIN);
-        srv_left.setPosition(LEFT_SERVO_MAX);
-        srv_right.setPosition(RIGHT_SERVO_MAX);
-        */
+        srv_left.setPosition(LEFT_SERVO_OUT);
+        srv_right.setPosition(RIGHT_SERVO_OUT);
+        srv_left.setPosition(LEFT_SERVO_IN);
+        srv_right.setPosition(RIGHT_SERVO_IN);
+
     }
 
     /***

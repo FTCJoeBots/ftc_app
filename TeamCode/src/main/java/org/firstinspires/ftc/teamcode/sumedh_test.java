@@ -69,7 +69,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
  */
 
 @Autonomous(name="Pushbot:yo mama yayay", group="Pushbot")
-//@Disabled
+@Disabled
 public class sumedh_test extends LinearOpMode {
 
     /* Declare OpMode members. */

@@ -68,7 +68,7 @@ import org.firstinspires.ftc.robotcontroller.external.samples.HardwarePushbot;
  */
 
 @Autonomous(name="Joebot: Auto Drive By Encoder", group="Joebot")
-//@Disabled
+@Disabled
 public class Nick_Levi_Drive extends LinearOpMode {
 
     /* Declare OpMode members. */

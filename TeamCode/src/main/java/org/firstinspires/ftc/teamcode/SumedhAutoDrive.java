@@ -66,7 +66,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @Autonomous(name="the one and only code  ", group="Test")
-//@Disabled
+@Disabled
 public class SumedhAutoDrive extends LinearOpMode {
 
     /* Declare OpMode members. */

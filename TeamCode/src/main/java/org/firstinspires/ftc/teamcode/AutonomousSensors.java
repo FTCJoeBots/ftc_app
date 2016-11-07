@@ -53,7 +53,7 @@ This file demonstrates usage of sensors.
 public class AutonomousSensors extends LinearOpMode {
 
     /* Declare OpMode members. */
-    HardwareJoeBot         robot   = new HardwareJoeBot();   // Use a Pushbot's hardware
+    HardwareJoeBot          robot   = new HardwareJoeBot();   // Use a Pushbot's hardware
     private ElapsedTime     runtime = new ElapsedTime();
 
 
